@@ -1,8 +1,9 @@
 #' @title Compute the conventional Pearson's correlation and concordance correlation
 #'        of functional data
 #'
-#' @description Compute the conventional Pearson's correlation coefficient and
-#'              concordance correlation coefficeint of two data sets.
+#' @description For each subject/row, we first obtain the average of all time points
+#'              and then compute the conventional Pearson's correlation
+#'              coefficient and concordance correlation coefficeint
 #'
 #' @param X: matrix with columns being time points and rows being subjects
 #' @param Y: matrix with columns being time points and rows being subjects, same size as X

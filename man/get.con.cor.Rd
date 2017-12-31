@@ -18,8 +18,9 @@ rho: conventional Pearson's correlation coefficient
 ccc: conventional concordance correlation coefficient
 }
 \description{
-Compute the conventional Pearson's correlation coefficient and
-             concordance correlation coefficeint of two data sets.
+For each subject/row, we first obtain the average of all time points
+             and then compute the conventional Pearson's correlation
+             coefficient and concordance correlation coefficeint
 }
 \examples{
 x = matrix(rnorm(12), 3, 4)
