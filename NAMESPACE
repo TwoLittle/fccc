@@ -1,2 +1,3 @@
 exportPattern("^[[:alpha:]]+")
+#export(get.con.cor)
 import(data.table)
