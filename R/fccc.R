@@ -13,31 +13,6 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
-myhello <- function() {
-  print("Hello, world!")
-}
-
-# Find the "covariance" between data set X and Y with weight matrix W
-mCov <- function(X, Y, W){
-
-  nt    <- ncol(X)
-  nsubj <- nrow(X)
-  XW    <- X*W
-  YW    <- Y*W
-  XW[is.nan(XW)] <- 0
-  YW[is.nan(YW)] <- 0
-
-  Xsum  <- rep(NA, nsubj)
-  Ysum  <- rep(NA, nsubj)
-
-  for(i in 1:nsubj){
-    Xsum[i] <- sum(XW[i,W[i,]!=0])
-    Ysum[i] <- sum(YW[i,W[i,]!=0])
-  }
-
-  mean(Xsum*Ysum) - mean(Xsum)*mean(Ysum)
-
-}
 
 ### Get the functional rho/ccc and their standard error
 get.fun.cor <- function(X, Y, W=NULL){
@@ -45,6 +20,28 @@ get.fun.cor <- function(X, Y, W=NULL){
   # Y: data from measurement 2
   # W: weight for all data points
   # X,Y,W: are all matrix of the same size
+
+  # Find the "covariance" between data set X and Y with weight matrix W
+  mCov <- function(X, Y, W){
+
+    nt    <- ncol(X)
+    nsubj <- nrow(X)
+    XW    <- X*W
+    YW    <- Y*W
+    XW[is.nan(XW)] <- 0
+    YW[is.nan(YW)] <- 0
+
+    Xsum  <- rep(NA, nsubj)
+    Ysum  <- rep(NA, nsubj)
+
+    for(i in 1:nsubj){
+      Xsum[i] <- sum(XW[i,W[i,]!=0])
+      Ysum[i] <- sum(YW[i,W[i,]!=0])
+    }
+
+    mean(Xsum*Ysum) - mean(Xsum)*mean(Ysum)
+
+  }
 
   nt    <- ncol(X)
   nsubj <- nrow(X)
@@ -138,3 +135,75 @@ get.con.cor <- function(X, Y){
   return(list(rho = rho, ccc = ccc))
 
 }
+
+
+# Given a data set, generate a new data set that is correlated with the
+# given data with correlation rho
+
+get.cor.data <- function(data, rho, weights, upper = 10000){
+
+  # generate a new vecotr that is correlated with a given vector with correlation r
+  r.empr <- function(x, r){
+    # r is correlation
+
+    n <- length(x)
+    DT <- data.table(x)
+    DT <- DT[, .(p = .N/n), by = "x"]
+
+    if(length(DT$x) == 1){
+      x1 <- rep(DT$x, n)
+    } else {
+      x1 <- sample(x = DT$x, size = n, prob = DT$p, replace = T)
+    }
+
+    y <- r*x + sqrt(1-r^2)*x1
+
+    return(round(y))
+
+  }
+
+  # Get the emprical distribution for a given data
+  get.dist <- function(data){
+    # data is a vector
+
+    x <- data[!is.nan(data)]
+    n <- length(x)
+    x.dt <- data.table(x)
+    x.dt <- x.dt[, .(p = .N/n), by = "x"]
+    x.dt <- x.dt[order(x)]
+
+    return(x.dt)
+
+  }
+
+
+  data <- as.matrix(data)
+  nsubj <- nrow(data)
+  ndays <- ncol(data)
+
+  sim.data <- matrix(NaN, nrow = nsubj, ncol = ndays)
+  vrhoc <- rep(NA, ndays)
+  weights <- weights[1:ndays]
+
+  for(t in 1:ndays){
+
+    idx <- !is.nan(data[,t])
+    if(sum(idx) == 0) next
+    x <- data[idx, t]
+    mu_x <- mean(x)
+    sigma2_x <- var(x)
+    vrhoc[t] <- 1/( 1/rho + (rho + sqrt(1-rho^2) - 1)^2*mu_x^2/(2*rho*sigma2_x) )
+
+    y <- r.empr(x, rho)
+    y[y > upper] <- upper
+    sim.data[idx, t] <- y
+
+  }
+
+  index <- !is.na(vrhoc)
+  rhoc <- sum(vrhoc[index] * weights[index]) / sum(weights[index])
+
+  return(list(sim.data = sim.data, rhoc = rhoc))
+
+}
+
