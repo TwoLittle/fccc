@@ -1,7 +1,7 @@
 Package: fccc
 Type: Package
 Title: Compute functional correlation and ccc
-Version: 0.1.0
+Version: 0.1.1
 Author: Wanjun Liu
 Maintainer: Wanjun Liu <wxl204@psu.edu>
 Description: More about what it does (maybe more than one line)
