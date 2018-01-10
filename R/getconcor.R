@@ -29,7 +29,7 @@ get.con.cor <- function(X, Y){
   mux <- mean(nx)
   muy <- mean(ny)
   ccc <- 2*cov(nx, ny) / ((mux - muy)^2 + var(nx) + var(ny))
-  rho <- cor(x,y)
+  rho <- cor(nx,ny)
 
   return(list(rho = rho, ccc = ccc))
 
