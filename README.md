@@ -1,8 +1,10 @@
 ## fccc - functional concordance correlation coefficient
 
-Fccc, an abbreviation of functional concordance correlation coefficient, is a better method to quantify the correlation between TLFB and daily process data. We developed an R package, namely fccc, and distributed it via Github. For more details and it applications, see the paper 
+Fccc, an abbreviation of functional concordance correlation coefficient, is a better method to quantify the correlation between TLFB and daily process data. We developed an R package, namely fccc, and distributed it via Github. For more details and it applications, refer to the following papers 
   
 * Liu, W., Li, R., Zimmerman, M. A., Walton, M. A., Cunningham, R. M., & Buu, A. (2019). Statistical methods for evaluating the correlation between timeline follow-back data and daily process data with applications to research on alcohol and marijuana use. Addictive behaviors, 94, 147-155.
+
+* Li, R., Chow, M. (2005). Evaluation of Reproducibility for Paired Functional Data. Journal of Multivariate Analysis, 93(1), 81-101. doi: 10.1016/j.jmva.2004.01.010.
   
 To install the package, please use the following commands:
   
