@@ -9,8 +9,8 @@ The package includes an introduction about the functions that can be used to car
     >help(package = 'fccc')
 There are two functions in the package:
 
-    get.con.cor(X, Y): calculates the conventional Pearson’s correlation coefficient and the conventional concordance correlation coefficient.
-    get.fun.cor(X, Y, W): calculates the functional Pearson’s correlation coefficient and the functional concordance correlation coefficient.
+    get.con.cor(X, Y) #calculates the conventional Pearson’s correlation coefficient and the conventional concordance correlation coefficient.
+    get.fun.cor(X, Y, W) #calculates the functional Pearson’s correlation coefficient and the functional concordance correlation coefficient.
     
 The input data X and Y should be prepared in a matrix form with each row being a subject and each column being a time point. X and Y should be of the same size. Missing values should be coded as NaN. 
         The function, get.fun.cor(X, Y, W), also allows the user to specify the weight function, W, based on the research context. If the user does not specify the weight function W, get.fun.cor uses equal weights for each time point by default. For example, 
