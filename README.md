@@ -1,6 +1,10 @@
 ## fccc - functional concordance correlation coefficient
 
-  We developed an R package, fccc, which is an abbreviation of functional concordance correlation coefficient and distributed it via Github. To install the package, please use the following commands:
+  We developed an R package, fccc, which is an abbreviation of functional concordance correlation coefficient and distributed it via Github. For more details and it applications, see the paper 
+  
+Liu, W., Li, R., Zimmerman, M. A., Walton, M. A., Cunningham, R. M., & Buu, A. (2019). Statistical methods for evaluating the correlation between timeline follow-back data and daily process data with applications to research on alcohol and marijuana use. Addictive behaviors, 94, 147-155.
+  
+To install the package, please use the following commands:
   
     >devtools::install_github("TwoLittle/fccc")
     >library(fccc)
