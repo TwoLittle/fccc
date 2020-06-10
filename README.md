@@ -1,8 +1,8 @@
 ## fccc - functional concordance correlation coefficient
 
-  We developed an R package, fccc, which is an abbreviation of functional concordance correlation coefficient and distributed it via Github. For more details and it applications, see the paper 
+We developed an R package, fccc, which is an abbreviation of functional concordance correlation coefficient and distributed it via Github. For more details and it applications, see the paper 
   
-Liu, W., Li, R., Zimmerman, M. A., Walton, M. A., Cunningham, R. M., & Buu, A. (2019). Statistical methods for evaluating the correlation between timeline follow-back data and daily process data with applications to research on alcohol and marijuana use. Addictive behaviors, 94, 147-155.
+* Liu, W., Li, R., Zimmerman, M. A., Walton, M. A., Cunningham, R. M., & Buu, A. (2019). Statistical methods for evaluating the correlation between timeline follow-back data and daily process data with applications to research on alcohol and marijuana use. Addictive behaviors, 94, 147-155.
   
 To install the package, please use the following commands:
   
@@ -16,8 +16,7 @@ There are two functions in the package:
     get.con.cor(X, Y) #calculates the conventional Pearson’s correlation coefficient and the conventional concordance correlation coefficient.
     get.fun.cor(X, Y, W) #calculates the functional Pearson’s correlation coefficient and the functional concordance correlation coefficient.
     
-The input data X and Y should be prepared in a matrix form with each row being a subject and each column being a time point. X and Y should be of the same size. Missing values should be coded as NaN. 
-        The function, get.fun.cor(X, Y, W), also allows the user to specify the weight function, W, based on the research context. If the user does not specify the weight function W, get.fun.cor uses equal weights for each time point by default. For example, 
+The input data X and Y should be prepared in a matrix form with each row being a subject and each column being a time point. X and Y should be of the same size. **Missing values should be coded as NaN**. The function, get.fun.cor(X, Y, W), also allows the user to specify the weight function, W, based on the research context. If the user does not specify the weight function W, get.fun.cor uses equal weights for each time point by default. For example, 
         
     >x = matrix(norm(12), 3, 4)
     >y = matrix(norm(12), 3, 4)
